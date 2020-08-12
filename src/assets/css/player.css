@@ -1,0 +1,73 @@
+.player {
+  width: 100%;
+  height: 80px;
+  z-index: 100;
+}
+.player .transparent {
+  height: 30px;
+  width: 100%;
+}
+.player .control {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+}
+.player .control .fl {
+  float: left;
+}
+.player .control .left {
+  overflow: hidden;
+}
+.player .control .left > div {
+  float: left;
+  color: #999;
+  font-size: 20px;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
+}
+.player .control .right {
+  width: 400px;
+  margin-left: 30px;
+  height: 100%;
+}
+.player .control .right .block {
+  height: 100%;
+}
+.player .control .time {
+  margin-left: 10px;
+  color: #999;
+  font-size: 12px;
+  line-height: 50px;
+}
+.player .control .button {
+  cursor: pointer;
+  background-color: transparent;
+  float: left;
+  color: #999;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.player .control .button:hover {
+  color: #e8e8e8;
+}
+.player .control .volume {
+  position: relative;
+}
+.player .control .volume .block {
+  position: absolute;
+  left: -8px;
+  bottom: 38px;
+  padding-top: 20px;
+  background-color: #000;
+}
+.player .block {
+  padding-top: 6px;
+}
+.player .el-slider__bar {
+  background-color: #c70c0c;
+}
+.player /deep/ .el-slider__button {
+  border: 2px solid #c70c0c;
+}

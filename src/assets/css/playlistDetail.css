@@ -1,0 +1,116 @@
+.playlistDetail {
+  width: 100%;
+  overflow: hidden;
+}
+.playlistDetail .fl {
+  float: left;
+}
+.playlistDetail .left {
+  width: 200px;
+  padding: 3px;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+}
+.playlistDetail .right {
+  width: calc(100% - 200px);
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.playlistDetail .right .head {
+  font-size: 20px;
+}
+.playlistDetail .right .up {
+  margin-top: 20px;
+  overflow: hidden;
+  font-size: 12px;
+}
+.playlistDetail .right .up > div {
+  float: left;
+  line-height: 35px;
+  height: 35px;
+}
+.playlistDetail .right .up img {
+  width: 35px;
+}
+.playlistDetail .right .up .name {
+  margin-left: 10px;
+}
+.playlistDetail .right .singer,
+.playlistDetail .right .song {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.playlistDetail .right .singer p,
+.playlistDetail .right .song p {
+  margin-top: 3px;
+}
+.playlistDetail .right .option {
+  overflow: hidden;
+  margin-top: 20px;
+}
+.playlistDetail .right .option li {
+  cursor: pointer;
+  list-style: none;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  line-height: 30px;
+  background-color: #f3f3f3;
+}
+.playlistDetail .right .option li .fa {
+  margin-right: 5px;
+  font-size: 14px;
+}
+.playlistDetail .right .option .play {
+  background-color: #2172c1;
+  color: white;
+}
+.playlistDetail .right .tags {
+  overflow: hidden;
+}
+.playlistDetail .right .tags::before {
+  content: '';
+  display: block;
+  clear: both;
+}
+.playlistDetail .right .tags li {
+  float: left;
+  border-radius: 50px;
+  padding: 3px 7px;
+  background-color: #f0f0f0;
+  font-size: 12px;
+  margin-right: 20px;
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+}
+.playlistDetail .right .desc {
+  margin-top: 20px;
+  font-size: 12px;
+}
+.playlistDetail .right .desc::before {
+  content: '';
+  display: block;
+  clear: both;
+}
+.playlistDetail .right .desc p {
+  white-space: pre-line;
+}
+.playlistDetail .right .lyric {
+  font-size: 12px;
+  margin-top: 20px;
+}
+.playlistDetail .right .lyric p {
+  height: 20px;
+  line-height: 20px;
+}
+.playlistDetail a {
+  text-decoration: none;
+  color: #0c73c2;
+}
+.playlistDetail a:hover {
+  text-decoration: underline;
+}
