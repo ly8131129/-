@@ -13,6 +13,10 @@ export const search = {
 
   mutations:{
     getKey(state,key){
+      let reg = /\<script\>.+?\<\/script\>/gi
+      if(reg.test(key)){
+        key = key.replace(reg,'')
+      }
       state.keywords = key
     },
 

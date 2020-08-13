@@ -16,7 +16,7 @@
             <span>{{suggestion.type[index]}}</span>
             </div>
           <div class="right">
-            <p v-for="(item1,index1) in suggestion[item]" :key="index1">{{item1.name}}</p>
+            <p v-for="(item1,index1) in suggestion[item]" :key="index1" @click="goPage(item1.name,suggestion['type_n'][index])">{{item1.name}}</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,8 @@ export default {
     return{
       visible:false,
       searchText:'',
-      suggestion:[]
+      suggestion:[],
+      timer: null
     }
   },
 
@@ -45,58 +46,82 @@ export default {
     }
   },
   methods:{
-    // 推荐搜索结果
+    // 显示推荐搜索结果
     showSearchBox(){
+      
+      let _this = this
+      this.visible  = true
+      clearTimeout(this.timer)
       if(this.searchText){
-        this.visible  = true
-
-        this.axios({
-          method:'GET',
-          url:'/search/suggest',
-          params:{
-            keywords: this.searchText
-          }
-        }).then(res =>{
-          console.log('搜索建议',res)
-          this.suggestion = res.data.result
-          this.suggestion.type = []
-          this.suggestion.url = []
-          res.data.result.order.forEach((e,i) =>{
-            switch(e){
-              case 'songs' :
-                this.suggestion.type[i] = '单曲';
-                this.suggestion.url[i] = require('../assets/images/music.png')
-                break;
-              case 'artists' :
-                this.suggestion.type[i] = '歌手';
-                this.suggestion.url[i] = require('../assets/images/singer.png')
-                break;
-              case 'albums' :
-                this.suggestion.type[i] = '专辑';
-                this.suggestion.url[i] = require('../assets/images/album.png')
-                break;
-              case 'playlists' :
-                this.suggestion.type[i] = '歌单';
-                this.suggestion.url[i] = require('../assets/images/playlist.png')
-                break;
-            }
-          })
-        }).catch(err =>{
-          console.log(err)
-        })
+        // 搜索防抖
+        this.timer = setTimeout(() =>{
+          _this.getResult()
+        },500)
       }else{
         this.visible  = false
       }
     },
+    
 
     hideResult(){
-      this.visible = false
+      setTimeout(() =>{
+        this.visible = false
+      },100)
     },
 
+    // 获取推荐搜索结果
+    getResult(){
+      this.axios({
+        method:'GET',
+        url:'/search/suggest',
+        params:{
+          keywords: this.searchText
+        }
+      }).then(res =>{
+        console.log('搜索建议',res)
+        this.suggestion = res.data.result
+        this.suggestion.type = []
+        this.suggestion.url = []
+        this.suggestion.type_n = []
+        res.data.result.order.forEach((e,i) =>{
+          switch(e){
+            case 'songs' :
+              this.suggestion.type[i] = '单曲';
+              this.suggestion.url[i] = require('../assets/images/music.png')
+              this.suggestion.type_n[i] = 1
+              break;
+            case 'artists' :
+              this.suggestion.type[i] = '歌手';
+              this.suggestion.url[i] = require('../assets/images/singer.png')
+              this.suggestion.type_n[i] = 100
+              break;
+            case 'albums' :
+              this.suggestion.type[i] = '专辑';
+              this.suggestion.url[i] = require('../assets/images/album.png')
+              this.suggestion.type_n[i] = 10
+              break;
+            case 'playlists' :
+              this.suggestion.type[i] = '歌单';
+              this.suggestion.url[i] = require('../assets/images/playlist.png')
+              this.suggestion.type_n[i] = 1000
+              break;
+          }
+        })
+      }).catch(err =>{
+        console.log(err)
+      })
+    },
+
+    // 回车跳转
     goResult(e){
       if(e.keyCode == 13 && this.searchText != ''){
         this.$router.push({name:'SearchResult',query:{keywords:this.searchText,type:1}})
       }
+    },
+
+    // 点击搜索结果跳转
+    goPage(keywords,type){
+      this.$router.push({name:'SearchResult',query:{keywords:keywords,type:type}})
     }
   },
   watch:{
